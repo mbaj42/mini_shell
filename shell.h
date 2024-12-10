@@ -14,10 +14,6 @@
 
 typedef struct s_tokens t_tokens; // Deklaracja typu
 
-typedef struct s_data {
-    char        *input;    // Wczytane wejście
-    t_tokens    *tokens;   // Lista tokenów
-}               t_data;
 
 enum token_type {
     WORD,        // Reprezentuje słowa (np. polecenia lub argumenty)
@@ -40,34 +36,25 @@ typedef struct s_tokens {
     struct s_tokens *prev;  // Wskaźnik do poprzedniego tokena
 } t_tokens;
 
-// typedef struct s_data
-// {
-// 	char			*input;
-// 	char			**envir; // zmienne środowiskowe
-// 	int				stdin;
-// 	int				stdout;
-// 	t_tokens		*tokens;
-// 	t_env			*env;
-// 	t_command_full	*commands;
-// 	struct termios	terminal;
-// 	struct s_data	*next;
-// }					t_data;
-
-
-
-typedef enum token_type t_token_type;
-/*tokeny*/
-t_tokens *create_token(int type, char *value);
-void add_token_to_list(t_tokens **tokens, t_tokens *new_token);
-t_tokens *finall_tokenize_input(char *input);
-
+typedef struct s_data
+{
+	char			*input;
+	char			**envir; // zmienne środowiskowe
+	int				stdin;
+	int				stdout;
+	t_tokens		*tokens;
+	t_env			*env;
+	t_command_full	*commands;
+	struct termios	terminal;
+	struct s_data	*next;
+}					t_data;
 
 
 void	display_prompt(void);
 char	*read_command(void);
 
 /*PARSING PART*/
-t_data	*tokenize_input(char *line, t_data *data);
+t_data	*tokenize_input(char *line);
 char	*trim_input(char *line);
 bool	is_input_valid(char *line);
 

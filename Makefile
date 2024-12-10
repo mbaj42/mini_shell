@@ -6,13 +6,19 @@ LDFLAGS = -lreadline
 # Nazwa programu
 NAME = shell
 
-# Pliki źródłowe
-SRC = shell.c prompt.c user_input.c tokens.c tokenize_input.c valid_input.c error_handler.c
-OBJ = $(SRC:.c=.o)
+# Ścieżki katalogów
+SRC_DIR = src
+OBJ_DIR = obj
+LIBFT_DIR = libft
+PRINTF_DIR = printf
+
+# Pliki źródłowe i obiektowe
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # Biblioteki
-LIBFT = libft/libft.a
-PRINTF = printf/libftprintf.a
+LIBFT = $(LIBFT_DIR)/libft.a
+PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 # Cel główny
 all: $(NAME)
@@ -22,12 +28,13 @@ $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(PRINTF) $(LDFLAGS)
 
 # Kompilacja plików .c do .o
-%.o: %.c shell.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
 # Czyszczenie plików obiektowych
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 # Czyszczenie wszystkich plików
 fclean: clean
@@ -38,7 +45,7 @@ re: fclean all
 
 # Wspieranie bibliotek
 $(LIBFT):
-	make -C libft
+	make -C $(LIBFT_DIR)
 
 $(PRINTF):
-	make -C printf
+	make -C $(PRINTF_DIR)

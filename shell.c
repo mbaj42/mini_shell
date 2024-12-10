@@ -4,13 +4,7 @@
 int     main(void)
 {
     char    *line;
-    t_data  *hell;
-    t_data *hell = malloc(sizeof(t_data));
-if (!hell)
-    ft_handle_error("Memory allocation failed");
-
-hell->tokens = NULL; // Ważne!
-hell->input = NULL;
+    char    *trimmed_input;
 
     while(true)
     {
@@ -18,7 +12,10 @@ hell->input = NULL;
         line = read_command();
         if(!line)
             break;
-        hell = tokenize_input(line, hell);
+        init_minishell(line);
+        trimmed_input = check_input(line);
+        tokenize_input(trimmed_input);
+        // zwolnic pamiec trimmedline
         // execute_command(line);
             free(line);
     }
