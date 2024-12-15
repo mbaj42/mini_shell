@@ -1,30 +1,64 @@
 #include "../include/shell.h"
 
+static void init_minishell(t_data **minishell, char **envp)
+{
+
+    minishell = (t_data *)malloc(sizeof(t_data));
+    (*minishell)->input = NULL;
+    (*minishell)->commands = NULL;
+    (*minishell)->tokens = NULL;
+    (*minishell)->envir = envp;
+    (*minishell)->stdin = dup(0);
+	(*minishell)->stdout = dup(1);
+    tcgetattr(STDIN_FILENO, &(*minishell)->terminal);
+}
+
+
+void	reset_echoctl(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	if (!(term.c_lflag & ECHOCTL))
+	{
+		term.c_lflag |= ECHOCTL;
+		tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	}
+}
+
+void	minishell_loop(t_data **minishell)
+{
+    while(1)
+    {
+        ft_free_minishell(minishell, false);
+        /*Gdy wywołujesz ft_free_minishell(minishell, false);, program:
+        Wie, że ma usunąć tylko dane tymczasowe (np. input, tokens), ale zachować zmienne środowiskowe i główną strukturę minishell.*/
+        (*minishell)->input = readline(PROMPT);
+        reset_echoctl();
+        if(handle_empty_input(minishell))
+            break;
+        if(handle_whitespace_or_syntax(minishell))
+            continue;
+        if(process_tokens(minishell))
+        {
+            //execute
+        }
+    }
+}
+
 int main(int argc, char **argv, char **envp) {
     
     char        *input;
-    //t_data      *shell;
+    t_data      *minishell;
     t_tokens    *tokens;
     (void)argc;
     (void)argv;
     (void)envp;
-    //shell = init_minishell(envp);
-    while(true)
-    {
-        input = read_command();
-        if(!input)
-            break;
-        if(is_input_valid(input))
-        {
-            printf("%s\n", input);
-            tokens = tokenize_input(input);
-        }
-            // execute(tokens);
-            // free_tokens(tokens);
-        else
-            ft_handle_error("Invalid input");
-        free(input);
-    }
-        //cleanup_shell(shell);
+    init_minishell(&minishell, envp);
+    //setup_signal_handlers();
+	//disable_echoctl();
+	//init_environment(&minishell, minishell->envir);
+    minishell_loop(&minishell);
+    //cleanup_shell(shell);
         return(0);
 }

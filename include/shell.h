@@ -8,10 +8,15 @@
 #include <stdbool.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+# include <termios.h>
 
 # include "../libft/libft.h"
 # include "../printf/ft_printf.h"
+# define PROMPT "Minihell_Maja_Edyta > "
 
+# ifndef ECHOCTL
+#  define ECHOCTL 0001000
+# endif
 
 typedef struct s_data
 {
@@ -19,16 +24,16 @@ typedef struct s_data
 	char			**envir;
 	int				stdin;
 	int				stdout;
-	//t_tokens		*tokens;
-	//t_env			*env;
-	//t_command_full	*commands;
-	//struct termios	terminal;
+	t_tokens		*tokens;
+	t_env			*env;
+	t_command_full	*commands;
+	struct termios	terminal;
 	struct s_data	*next;
 }					t_data;
 
 typedef struct s_tokens
 {
-	//t_token_type	type;
+	t_token_type	type;
 	char			*value;
 	struct s_tokens	*next;
 	struct s_tokens	*prev;
