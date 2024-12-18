@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 14:35:39 by ecymer            #+#    #+#             */
+/*   Updated: 2024/12/18 14:35:41 by ecymer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "shell.h"
 
 void    ft_handle_error(const char *msg)
@@ -6,6 +19,7 @@ void    ft_handle_error(const char *msg)
     exit(1);
 }
 
+//❌ 
 void    ft_free_minishell(t_data **minishell, bool is_crash)
 {
     if(!(*minishell))

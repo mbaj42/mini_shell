@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
+/*   Updated: 2024/12/18 14:44:29 by ecymer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHELL_H
 #define SHELL_H
 
@@ -39,24 +51,41 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }					t_tokens;
 
-// typedef enum e_token_type
-// {
-// 	T_WORD,
-// 	T_LESS,
-// 	T_GREAT,
-// 	T_DLESS,
-// 	T_DGREAT,
-// 	T_PIPE,
-// }
+typedef enum e_token_type
+{
+	T_WORD,
+	T_LESS,
+	T_GREAT,
+	T_DLESS,
+	T_DGREAT,
+	T_PIPE,
+};
 
-char    *read_command(void);
+void	minishell_loop(t_data **minishell);
+static void init_minishell(t_data **minishell, char **envp);
+void	reset_echoctl(void);
+bool    handle_empty_input(t_data **minishell);
+
+
+// error handler
+void    ft_free_minishell(t_data **minishell, bool is_crash);
 void    ft_handle_error(const char *msg);
+bool	handle_whitespace_or_syntax(t_data **minishell);
+//
 
-/*check input*/
-bool    check_input(const char *line);
-bool    is_input_valid(const char *line);
-bool is_quote_closed(const char *input);
 
-/*tokenizacja*/
-char **tokenize_input(const char *input);
+//tokeny
+bool	process_tokens(t_data **minishell);
+int	init_tokens(t_data **minishell);
+t_tokens	*get_token(char *input);
+t_tokens *update_tokens(t_tokens *token, char *input, int type);
+void    append_token(t_tokens **tokens, t_tokens *new_token);
+
+//help
+char	*ft_strncpy(char *dst, char *src, int num);
+bool	check_input(const char *line);
+bool	is_input_valid(const char *line);
+bool	is_quote_closed(const char *input);
+
+
 #endif

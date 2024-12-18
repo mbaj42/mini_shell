@@ -1,5 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_loop_helpers.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 14:35:46 by ecymer            #+#    #+#             */
+/*   Updated: 2024/12/18 14:35:49 by ecymer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../include/shell.h"
 
+//✅ 
 bool	handle_whitespace_or_syntax(t_data **minishell)
 {
     if (ft_is_only_whitespace((*minishell)->input))
@@ -13,22 +27,22 @@ bool	handle_whitespace_or_syntax(t_data **minishell)
         ft_handle_error("Minihell_Maja_Edyta: syntax error");
         return(true);
     }
-    //DOPISAĆ
-    //if (!ft_is_only_whitespace((*minishell)->input))
-	//add_history((*minishell)->input);
-    // czy daje poprawne komendy do historii
+    if (!ft_is_only_whitespace((*minishell)->input))
+	    add_history((*minishell)->input);
+        //biblioteka readline
 }
 
+//❌ 
 bool	process_tokens(t_data **minishell)
 {
-    init_tokens(minishell);
+    init_tokens(minishell); // ✅ 
     //sprawdza tokeny
     //parsuje je i rozszerza o zmienne środowiskowe
     //obsługuje przekierowania < i >
     // zwraca true, jeśli wszystko się powiedzie
 }
 
-
+// ✅ 
 bool    handle_empty_input(t_data **minishell)
 {
     if(!(*minishell)->input)

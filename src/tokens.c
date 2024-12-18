@@ -1,5 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokens.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
+/*   Updated: 2024/12/18 14:38:30 by ecymer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/shell.h"
 
+//✅ 
+void    append_token(t_tokens **tokens, t_tokens *new_token)
+{
+    t_tokens *current;
+    if(*tokens == NULL)
+    {
+        new_token->prev = NULL;
+        *tokens = new_token;
+    }
+    else
+    {
+        current = *tokens;
+        while(current->next != NULL)
+        {
+            current = current->next;
+            current->next = new_token;
+            current->prev = current;
+        }
+    }
+    new_token->next = NULL;
+}
+
+//✅ 
 //inicjalizujemy strukturę tokeny
 int	init_tokens(t_data **minishell)
 {
@@ -15,25 +50,77 @@ int	init_tokens(t_data **minishell)
     while(string && *string)
     {
         ft_skip_spaces(&string);
-        // pobieramy token
-        // jeśli jest token to:
-             // tworzymy noda i dodajemy tokena do listy
-             // przesuwamy wskaźnik, by przeskoczyć np. na nowe słowo
+        token = get_token(string);
+        if(token)
+        {
+            append_token(&((*minishell)->tokens), token);
+            // Przesuń wskaźnik string o długość wartości tokena
+            string += ft_strlen(token->value);
+        }
     }
-
-    //loop -> pomijamy nadmiar spacji
-    token = get_token(string);
-    //tworzenie noda i dopisywanie mu tokena
+    return(200);
 }
 
+
+//✅ 
 t_tokens	*get_token(char *input)
 {
     t_tokens *token;
+
     token = (t_tokens *)malloc(sizeof(t_tokens));
-	if (!token)
-		return (NULL);
+    if(!token)
+        return(NULL);
     token->value = NULL;
-    token->type = 0;
     token->next = NULL;
-    //porównywanie stringa i przypisywanie do typu tokena ten kawałek stringa
+    token->type = NULL;
+    if(*input)
+    {
+        if(ft_strncmp(">>", input, 2) == 0)
+            update_tokens(token, ">>", T_DGREAT);
+        else if(ft_strncmp("<<", input, 2) == 0)
+            update_tokens(token, "<<", T_DLESS);
+        else if(*input = "<")
+            update_tokens(token, "<", T_LESS);
+        else if(*input = ">")
+            update_tokens(token, ">", T_GREAT);
+        else if(*input = "|")
+            update_tokens(token, "|", T_PIPE);
+        else
+            update_tokens(token, input, T_WORD);
+    }
+    free(token);
+    return(NULL);
+}
+
+//✅ 
+t_tokens *update_tokens(t_tokens *token, char *input, int type)
+{
+    token->value = malloc(ft_strlen(input) + 1);
+    if(!token->value)
+        return(NULL);
+    ft_strncpy(token->value, input, ft_strlen(input));
+    token->value[ft_strlen(input)] = '\0';
+    token->type = type;
+    return(token);
+}
+
+//✅ 
+char    *ft_strncpy(char *dst, char *src, int num)
+{
+    int     i;
+
+    i = 0;
+    if(!dst || !src)
+        return(NULL);
+    while(src[i] != '\0' && i < num)
+    {
+        dst[i] = src[i];
+        i++;
+    }
+    while(i < num)
+    {
+        dst[i] = '\0';
+        i++;
+    }
+    return(dst);
 }

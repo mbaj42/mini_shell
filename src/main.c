@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/18 14:35:11 by ecymer            #+#    #+#             */
+/*   Updated: 2024/12/18 14:35:14 by ecymer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/shell.h"
 
+//✅ 
 static void init_minishell(t_data **minishell, char **envp)
 {
 
@@ -13,7 +26,7 @@ static void init_minishell(t_data **minishell, char **envp)
     tcgetattr(STDIN_FILENO, &(*minishell)->terminal);
 }
 
-
+//✅ 
 void	reset_echoctl(void)
 {
 	struct termios	term;
@@ -26,14 +39,17 @@ void	reset_echoctl(void)
 	}
 }
 
+//❌ 
 void	minishell_loop(t_data **minishell)
 {
     while(1)
     {
+        //✅ 
         ft_free_minishell(minishell, false);
         /*Gdy wywołujesz ft_free_minishell(minishell, false);, program:
         Wie, że ma usunąć tylko dane tymczasowe (np. input, tokens), ale zachować zmienne środowiskowe i główną strukturę minishell.*/
         (*minishell)->input = readline(PROMPT);
+        //✅ 
         reset_echoctl();
         if(handle_empty_input(minishell))
             break;
@@ -41,11 +57,12 @@ void	minishell_loop(t_data **minishell)
             continue;
         if(process_tokens(minishell))
         {
-            //execute
+            //execute_commands(minishell);
         }
     }
 }
 
+//❌ 
 int main(int argc, char **argv, char **envp) {
     
     char        *input;
