@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:44:29 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:40:24 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void    append_token(t_tokens **tokens, t_tokens *new_token);
 char	*ft_strncpy(char *dst, char *src, int num);
 bool	check_input(const char *line);
 bool	is_input_valid(const char *line);
-bool	is_quote_closed(const char *input);
+static bool	has_valid_quotes(char *str, int *i);
 
 
 #endif

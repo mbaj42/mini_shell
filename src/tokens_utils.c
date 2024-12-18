@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:21 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:36:22 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:43:14 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int    ft_is_only_white_spaces(char *str)
     i = 0;
     while(str[i] != '\0')
     {
-        if(!ft_is_white_space(str[i]));
+        if(!ft_is_white_space(str[i]))
             return(0);
         i++;
     }
@@ -40,6 +40,6 @@ void    ft_skip_spaces(char **s)
     {
         while(**s == '\t' || **s == '\n' || **s == '\v' || **s == '\f'
 		|| **s == '\r' || **s == ' ')
-            **s;
+            (*s)++;
     }
 }

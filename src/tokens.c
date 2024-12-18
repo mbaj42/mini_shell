@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:38:30 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:44:01 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ void    append_token(t_tokens **tokens, t_tokens *new_token)
     {
         current = *tokens;
         while(current->next != NULL)
-        {
             current = current->next;
-            current->next = new_token;
-            current->prev = current;
-        }
+        current->next = new_token;
+        new_token->prev = current;
     }
     new_token->next = NULL;
 }
@@ -79,11 +77,11 @@ t_tokens	*get_token(char *input)
             update_tokens(token, ">>", T_DGREAT);
         else if(ft_strncmp("<<", input, 2) == 0)
             update_tokens(token, "<<", T_DLESS);
-        else if(*input = "<")
+        else if(*input == "<")
             update_tokens(token, "<", T_LESS);
-        else if(*input = ">")
+        else if(*input == ">")
             update_tokens(token, ">", T_GREAT);
-        else if(*input = "|")
+        else if(*input == "|")
             update_tokens(token, "|", T_PIPE);
         else
             update_tokens(token, input, T_WORD);

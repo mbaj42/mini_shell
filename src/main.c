@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:11 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:35:14 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:46:10 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void init_minishell(t_data **minishell, char **envp)
 {
 
-    minishell = (t_data *)malloc(sizeof(t_data));
+    *minishell = (t_data *)malloc(sizeof(t_data));
     (*minishell)->input = NULL;
     (*minishell)->commands = NULL;
     (*minishell)->tokens = NULL;

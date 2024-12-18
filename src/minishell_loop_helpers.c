@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:46 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:35:49 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:45:32 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //✅ 
 bool	handle_whitespace_or_syntax(t_data **minishell)
 {
-    if (ft_is_only_whitespace((*minishell)->input))
+    if (ft_is_only_white_spaces((*minishell)->input))
 	{
 		free((*minishell)->input);
 		return (true);
