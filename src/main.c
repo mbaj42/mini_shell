@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:11 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 16:46:10 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 13:54:24 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	reset_echoctl(void)
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
 }
+// Ten kod resetuje ustawienie terminala, żeby włączyć lub upewnić się, 
+// że jest włączone coś zwanego ECHOCTL.
+//To ustawienie mówi terminalowi, czy ma wyświetlać specjalne znaki kontrolne
+// (np. ^C przy Ctrl+C) na ekranie.
+
 
 //❌ 
 void	minishell_loop(t_data **minishell)
@@ -70,7 +75,6 @@ int main(int argc, char **argv, char **envp) {
     t_tokens    *tokens;
     (void)argc;
     (void)argv;
-    (void)envp;
     init_minishell(&minishell, envp);
     //setup_signal_handlers();
 	//disable_echoctl();
@@ -79,3 +83,16 @@ int main(int argc, char **argv, char **envp) {
     //cleanup_shell(shell);
         return(0);
 }
+
+// (*minishell)->stdin = dup(0);
+// (*minishell)->stdout = dup(1);
+// W shellu (np. minishell) często wykonuje się operacje przekierowania, 
+// które tymczasowo zmieniają standardowe wejście/wyjście:
+// Przekierowanie wejścia (<): Zamiast czytać dane z terminala (deskryptor 0), program czyta z pliku.
+// Przekierowanie wyjścia (>): Zamiast pisać dane na terminal (deskryptor 1), program zapisuje do pliku.
+// Potoki (|): Wyjście jednego procesu jest przekierowywane jako wejście do innego.
+// Po wykonaniu polecenia shell musi przywrócić standardowe deskryptory wejścia i wyjścia.
+
+
+// tcgetattr(STDIN_FILENO, &(*minishell)->terminal);
+// pobiera USTAWIENIA TERMINALA i zapisuje je w strukturze

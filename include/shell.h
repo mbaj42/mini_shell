@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 15:40:24 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 13:51:50 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef struct s_data
 	int				stdin;
 	int				stdout;
 	t_tokens		*tokens;
-	t_env			*env;
-	t_command_full	*commands;
-	struct termios	terminal;
+	t_env			*env; // do manipulacji zmiennych środowiskowcyh
+	t_command_full	*commands; // przechowuje przetworzone polecenia
+	struct termios	terminal; // do zarządzania ustawieniami terminala
 	struct s_data	*next;
 }					t_data;
 

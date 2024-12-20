@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:39 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:35:41 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 13:54:12 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    ft_handle_error(const char *msg)
 void    ft_free_minishell(t_data **minishell, bool is_crash)
 {
     if(!(*minishell))
-        return(NULL); // jak nic nie ma, wychodzimy z funkcji i narka
+        return ; // jak nic nie ma, wychodzimy z funkcji i narka
     if((*minishell)->input)
         (*minishell)->input = NULL;
     if((*minishell)->tokens)
