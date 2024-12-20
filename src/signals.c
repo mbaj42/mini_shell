@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:52:16 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 18:47:39 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 19:12:26 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void    handle_sigint(int sig)
     (void)sig;
 
     write(1, "\n", 1);
-    rl_on_new_line();                 // Informuje readline, że rozpoczęto nową linię
-	rl_replace_line("", 0);           // Czyści aktualną linię w terminalu
-	rl_redisplay();                  // ponownie wyświetla prompt
+    rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 // wbudowane funkcje z biblioteki readline
 

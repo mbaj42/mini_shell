@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:11 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 13:54:24 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 19:16:17 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	minishell_loop(t_data **minishell)
     {
         //✅ 
         ft_free_minishell(minishell, false);
-        /*Gdy wywołujesz ft_free_minishell(minishell, false);, program:
-        Wie, że ma usunąć tylko dane tymczasowe (np. input, tokens), ale zachować zmienne środowiskowe i główną strukturę minishell.*/
         (*minishell)->input = readline(PROMPT);
         //✅ 
         reset_echoctl();
@@ -76,8 +74,8 @@ int main(int argc, char **argv, char **envp) {
     (void)argc;
     (void)argv;
     init_minishell(&minishell, envp);
-    //setup_signal_handlers();
-	//disable_echoctl();
+    setup_signal_handlers();
+	reset_echoctl();
 	//init_environment(&minishell, minishell->envir);
     minishell_loop(&minishell);
     //cleanup_shell(shell);
@@ -96,3 +94,6 @@ int main(int argc, char **argv, char **envp) {
 
 // tcgetattr(STDIN_FILENO, &(*minishell)->terminal);
 // pobiera USTAWIENIA TERMINALA i zapisuje je w strukturze
+
+/*Gdy wywołujesz ft_free_minishell(minishell, false);, program
+Wie, że ma usunąć tylko dane tymczasowe (np. input, tokens), ale zachować zmienne środowiskowe i główną strukturę minishell.*/

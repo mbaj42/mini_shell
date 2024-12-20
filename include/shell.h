@@ -6,21 +6,27 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 14:14:04 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 19:25:35 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <errno.h>
+#include <fcntl.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include <signal.h>
 #include <stdbool.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-# include <termios.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <termios.h>
+#include <unistd.h>
 
 # include "../libft/libft.h"
 # include "../printf/ft_printf.h"
@@ -43,6 +49,12 @@ typedef struct s_data
 	struct s_data	*next;
 }					t_data;
 
+typedef struct s_env
+{
+	char			value;
+	char			*key;
+	struct s_env	*next;
+}					t_env;
 typedef struct s_tokens
 {
 	t_token_type	type;
@@ -83,6 +95,7 @@ bool    handle_empty_input(t_data **minishell);
 void    ft_free_minishell(t_data **minishell, bool is_crash);
 void    ft_handle_error(const char *msg);
 bool	handle_whitespace_or_syntax(t_data **minishell);
+void	free_env(t_env *env);
 //
 
 
@@ -99,5 +112,8 @@ bool	check_input(const char *line);
 bool	is_input_valid(const char *line);
 static bool	has_valid_quotes(char *str, int *i);
 
+//signals
+void	setup_signal_handlers(void);
+void    handle_sigint(int sig);
 
 #endif

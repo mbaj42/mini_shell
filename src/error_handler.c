@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:39 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 14:53:17 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 19:22:08 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ void	ft_free_token_list(t_tokens **token_list)
         temp = temp_next;
     }
     *token_list = NULL;
+}
+
+void free_env(t_env *env) //musiałam dodać bo robię część z builtin "env" więc też alokuje pamięć i kopuje oryginalny env do naszego stworzonego bo robię przypadek dla builtin gdzie musi wypisać posortowane alfabetycznie env... Polecam!
+{
+    int i = 0;
+    if (!env)
+        return;
+    while (env[i].key)
+    {
+        free(env[i].key);
+        free(env[i].value);
+        i++;
+    }
+    free(env);
 }
 
 void    ft_handle_error(const char *msg)
