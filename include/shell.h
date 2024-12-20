@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 13:51:50 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 14:14:04 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ typedef enum e_token_type
 	T_DLESS,
 	T_DGREAT,
 	T_PIPE,
+};
+
+struct	s_command_full
+{
+	char			*cmd_name;
+	char			**args;
+	int				fd_out;
+	int				fd_in;
+	char			*here_doc;
+	t_redir			*redir_list_head;
+	t_command_full	*next;
+	t_command_full	*prev;
 };
 
 void	minishell_loop(t_data **minishell);
