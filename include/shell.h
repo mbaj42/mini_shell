@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 13:51:50 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 15:02:22 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef struct s_data
 	struct termios	terminal; // do zarządzania ustawieniami terminala
 	struct s_data	*next;
 }					t_data;
+
+typedef struct s_env
+{
+	char			value;
+	char			*key;
+	struct s_env	*next;
+}					t_env;
+
 
 typedef struct s_tokens
 {
