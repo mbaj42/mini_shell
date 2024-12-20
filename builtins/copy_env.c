@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:42:17 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/20 15:26:26 by mbaj             ###   ########.fr       */
+/*   Updated: 2024/12/20 17:30:13 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,51 @@
 	(*minishell).env[i] = tmp;
 }*/
 
-int	main(int argc, t_data *minishell, char **ev)
+int	main(int argc, t_data **minishell, char **ev)
 {
 	int ev_count;
 	int i;
+	char *delimiter;
+	int key_lenght;
+	int value_lenght;
 
 	ev_count = 0;
-	while (ev)
+	if (!ev || !(*ev))
+		return (3);
+	while (ev[ev_count])
 		ev_count++;
-	minishell->env = malloc((ev_count + 1) * sizeof(t_env));
-	if (!minishell->env)
+	(*minishell)->env = malloc((ev_count + 1) * sizeof(t_env));
+	if (!(*minishell)->env)
 	{
 		ft_free_minishell(minishell, true);
 		return (1);
 	}
+	i = 0;
+	while (i < ev_count)
+	{
+		delimiter = strchr(ev[i], '=');
+		if (delimiter)
+		{
+			key_lenght = delimiter - ev[i];
+			(*minishell)->env->key = malloc((key_lenght + 1) * sizeof(char));
+			if (!((*minishell)->env->key))
+			{
+				ft_free_minishell(minishell, true);
+				return (2);
+			}
+			(*minishell)->env->value = malloc((ft_strlen(delimiter + 1) + 1) * sizeof(char));
+			if (!((*minishell)->env->value))
+			{
+				ft_free_minishell(minishell, true);
+				return (2);
+			}
+			ft_strncpy((*minishell)->env[i].key, ev[i], key_lenght);
+			(*minishell)->env[i].key[key_lenght] = '\0';
+			ft_strcpy((*minishell)->env[i].value, delimiter + 1);
+		}
+		i++;
+	}
+	(*minishell)->env[ev_count].key = NULL;
+	(*minishell)->env[ev_count].value = NULL;
+	return (0);
 }
