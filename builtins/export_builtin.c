@@ -20,7 +20,7 @@ static int	export_no_args(t_data **minishell, char **envp)
 	i = 0;
 	copy_env(minishell, envp);
 	swap_alphabetic(&minishell);
-	while((*minishell)->env[i])
+	while (&(*minishell)->env[i])
 	{
 		write(1, "declare -x ", 11);
 		printf("%s=%s", (*minishell)->env[i].key, (*minishell)->env[i].value);
