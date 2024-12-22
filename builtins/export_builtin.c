@@ -1,17 +1,4 @@
-#include "shell.h"
-#include <errno.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <termios.h>
-#include <unistd.h>
+#include "../include/shell.h"
 
 static int	export_no_args(t_data **minishell, char **envp)
 {
@@ -23,12 +10,94 @@ static int	export_no_args(t_data **minishell, char **envp)
 	while (&(*minishell)->env[i])
 	{
 		write(1, "declare -x ", 11);
-		printf("%s=%s", (*minishell)->env[i].key, (*minishell)->env[i].value);
+		printf("%s=%s\n", (*minishell)->env[i].key, (*minishell)->env[i].value);
+		i++;
 	}
+}
+
+int	is_only_key(t_data **minishell, int	i, int	j)
+{
+	int	key_length;
+
+	key_length = ft_strlen((*minishell)->commands->args[i]) + 1;
+	(*minishell)->env[j].key = malloc((key_length) * sizeof(char));
+	if (!(*minishell)->env[j].key)
+	{
+		free_env((*minishell)->env[j]);
+		return (2);
+	}
+	(*minishell)->env[j].key = ft_strncpy((*minishell)->env[j].key,
+				(*minishell)->commands->args[i], key_length);
+	(*minishell)->env[j].value = malloc((1) * sizeof(char));
+	if (!(*minishell)->env[j].value)
+	{
+		free_env((*minishell)->env[j]);
+		return (2);
+	}
+	(*minishell)->env[j].value = ft_strcpy((*minishell)->env[j].value, "");
+	if ((*minishell)->commands->args[i + 1] == '\0')
+	{
+		(*minishell)->env[j + 1].key = NULL;
+		(*minishell)->env[j + 1].value = NULL;
+		return (3);
+	}
+	return(0);
 }
 
 int	export_builtin(t_data **minishell, char **envp)
 {
+	int	i;
+	int	key_length;
+	int	value_length;
+	int	is_equal_sign;
+	int	j;
+
+	i = 1;
+	is_equal_sign = 0;
 	if (!((*minishell)->commands->args[1]))
 		return (export_no_args(minishell, envp));
+	j = 0;
+	while (&(*minishell)->env[j])
+		j++;
+	while ((*minishell)->commands->args[i])
+	{
+		if (!(ft_strchr((*minishell)->commands->args[i], '=')))
+		{
+			if (is_equal_sign = 1)
+			{
+				is_only_key(*minishell, i, j);
+				if(is_only_key(*minishell, i, j) == 3)
+					return;
+			}
+			else
+				return (1);
+		}
+		else
+			is_equal_sign = 1;
+
+		key_length = ft_strchr((*minishell)->commands->args[i], '=')
+			- (*minishell)->commands->args[i] + 1;
+		(*minishell)->env[j].key = malloc((key_length) * sizeof(char));
+		if (!(*minishell)->env[j].key)
+		{
+			free_env((*minishell)->env[j]);
+			return (2);
+		}
+		(*minishell)->env[j].key = ft_strncpy((*minishell)->env[j].key,
+				(*minishell)->commands->args[i], key_length);
+		value_length = ft_strlen(ft_strchr((*minishell)->commands->args[i], '=')
+				+ 1) + 1;
+		(*minishell)->env[j].value = malloc(value_length * sizeof(char));
+		if (!(*minishell)->env[j].value)
+		{
+			free_env((*minishell)->env[j]);
+			return (2);
+		}
+		(*minishell)->env[j].value = ft_strncpy((*minishell)->env[j].value,
+				(*minishell)->commands->args[i], value_length);
+		i++;
+		j++;
+	}
+	(*minishell)->env[j].key = NULL;
+	(*minishell)->env[j].value = NULL;
 }
