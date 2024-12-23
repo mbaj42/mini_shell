@@ -6,19 +6,19 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 19:25:35 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:38:20 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <limits.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
@@ -36,33 +36,6 @@
 #  define ECHOCTL 0001000
 # endif
 
-typedef struct s_data
-{
-	char			*input;
-	char			**envir;
-	int				stdin;
-	int				stdout;
-	t_tokens		*tokens;
-	t_env			*env; // do manipulacji zmiennych środowiskowcyh
-	t_command_full	*commands; // przechowuje przetworzone polecenia
-	struct termios	terminal; // do zarządzania ustawieniami terminala
-	struct s_data	*next;
-}					t_data;
-
-typedef struct s_env
-{
-	char			value;
-	char			*key;
-	struct s_env	*next;
-}					t_env;
-typedef struct s_tokens
-{
-	t_token_type	type;
-	char			*value;
-	struct s_tokens	*next;
-	struct s_tokens	*prev;
-}					t_tokens;
-
 typedef enum e_token_type
 {
 	T_WORD,
@@ -71,22 +44,48 @@ typedef enum e_token_type
 	T_DLESS,
 	T_DGREAT,
 	T_PIPE,
-};
+} t_token_type;
 
-struct	s_command_full
+typedef struct s_tokens
+{
+	t_token_type	type;
+	char			*value;
+	struct s_tokens	*next;
+	struct s_tokens	*prev;
+} t_tokens;
+
+typedef struct s_command_full
 {
 	char			*cmd_name;
 	char			**args;
 	int				fd_out;
 	int				fd_in;
 	char			*here_doc;
-	t_redir			*redir_list_head;
-	t_command_full	*next;
-	t_command_full	*prev;
-};
+} t_command_full;
+
+typedef struct s_data
+{
+	char			*input;
+	char			**envir;
+	int				stdin;
+	int				stdout;
+	t_tokens		*tokens;
+	t_command_full	*commands;
+	struct termios	terminal;
+	struct s_data	*next;
+} t_data;
+
+typedef struct s_env
+{
+	char			value;
+	char			*key;
+	struct s_env	*next;
+}					t_env;
+
+
 
 void	minishell_loop(t_data **minishell);
-static void init_minishell(t_data **minishell, char **envp);
+void	init_minishell(t_data **minishell, char **envp);
 void	reset_echoctl(void);
 bool    handle_empty_input(t_data **minishell);
 
@@ -110,7 +109,8 @@ void    append_token(t_tokens **tokens, t_tokens *new_token);
 char	*ft_strncpy(char *dst, char *src, int num);
 bool	check_input(const char *line);
 bool	is_input_valid(const char *line);
-static bool	has_valid_quotes(char *str, int *i);
+bool	has_valid_quotes(char *str, int *i);
+int		ft_is_only_whitespace(char *str);
 
 //signals
 void	setup_signal_handlers(void);

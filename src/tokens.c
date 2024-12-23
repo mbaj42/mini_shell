@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 16:44:01 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:40:48 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_tokens(t_data **minishell)
 
     token = NULL;
     string = (*minishell)->input;
-    if(!string || ft_is_only_white_spaces(string) || ft_strlen(string) == 0)
+    if(!string || ft_is_only_whitespace(string) || ft_strlen(string) == 0)
     {
             return(200);
     }
@@ -55,6 +55,8 @@ int	init_tokens(t_data **minishell)
             // Przesuń wskaźnik string o długość wartości tokena
             string += ft_strlen(token->value);
         }
+        if (!token)
+            break;
     }
     return(200);
 }
@@ -121,4 +123,15 @@ char    *ft_strncpy(char *dst, char *src, int num)
         i++;
     }
     return(dst);
+}
+
+int	ft_is_only_whitespace(char *str)
+{
+	while (*str)
+	{
+		if (!ft_is_whitespace(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }

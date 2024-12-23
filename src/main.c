@@ -6,14 +6,14 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:11 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 19:16:17 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:22:15 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
 //✅ 
-static void init_minishell(t_data **minishell, char **envp)
+void    init_minishell(t_data **minishell, char **envp)
 {
 
     *minishell = (t_data *)malloc(sizeof(t_data));
@@ -52,6 +52,12 @@ void	minishell_loop(t_data **minishell)
         //✅ 
         ft_free_minishell(minishell, false);
         (*minishell)->input = readline(PROMPT);
+        if (!(*minishell)->input)
+        {
+            ft_free_minishell(minishell, true);
+            printf("exit\n");
+            break;
+        }
         //✅ 
         reset_echoctl();
         if(handle_empty_input(minishell))
@@ -68,9 +74,9 @@ void	minishell_loop(t_data **minishell)
 //❌ 
 int main(int argc, char **argv, char **envp) {
     
-    char        *input;
+    //char        *input;
     t_data      *minishell;
-    t_tokens    *tokens;
+    //t_tokens    *tokens;
     (void)argc;
     (void)argv;
     init_minishell(&minishell, envp);

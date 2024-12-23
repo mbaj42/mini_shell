@@ -1,6 +1,8 @@
 # Kompilator i flagi
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I/usr/local/opt/readline/include -Iinclude
+
+
 LDFLAGS = -lreadline
 
 # Nazwa programu

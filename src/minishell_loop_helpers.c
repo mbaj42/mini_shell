@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:46 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 16:45:32 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/20 20:31:36 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //✅ 
 bool	handle_whitespace_or_syntax(t_data **minishell)
 {
-    if (ft_is_only_white_spaces((*minishell)->input))
+    if (ft_is_only_whitespace((*minishell)->input))
 	{
 		free((*minishell)->input);
 		return (true);
@@ -30,6 +30,7 @@ bool	handle_whitespace_or_syntax(t_data **minishell)
     if (!ft_is_only_whitespace((*minishell)->input))
 	    add_history((*minishell)->input);
         //biblioteka readline
+    return(false);
 }
 
 //❌ 
@@ -40,6 +41,7 @@ bool	process_tokens(t_data **minishell)
     //parsuje je i rozszerza o zmienne środowiskowe
     //obsługuje przekierowania < i >
     // zwraca true, jeśli wszystko się powiedzie
+    return(true);
 }
 
 // ✅ 
@@ -47,7 +49,7 @@ bool    handle_empty_input(t_data **minishell)
 {
     if(!(*minishell)->input)
     {
-        ft_free_minishell(*minishell, true);
+        ft_free_minishell(minishell, true);
         printf("exit\n");
         return(true);
     }
