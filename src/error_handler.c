@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:39 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 20:21:28 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 22:50:02 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,20 @@ void    ft_handle_error(const char *msg)
     printf("ERROR: %s\n", msg);
     exit(1);
 }
-
-//❌ 
+void free_env(t_env *env) //musiałam dodać bo robię część z builtin "env" więc też alokuje pamięć i kopuje oryginalny env do naszego stworzonego bo robię przypadek dla builtin gdzie musi wypisać posortowane alfabetycznie env... Polecam!
+{
+    int i = 0;
+    if (!env)
+        return;
+    while (env[i].key)
+    {
+        free(env[i].key);
+        free(env[i].value);
+        i++;
+    }
+    free(env);
+}
+//❌
 void    ft_free_minishell(t_data **minishell, bool is_crash)
 {
     if(!(*minishell))
