@@ -6,10 +6,9 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:36 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 14:37:10 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 23:35:36 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/shell.h"
 
@@ -36,7 +35,7 @@ bool is_quote_closed(const char *input) {
     return (quote_type == '\0');
 }
 
-bool    is_input_valid(const char *line)
+bool    is_input_valid(char *line)
 {
     if (!line || ft_strlen(line) == 0)
         return false; // Pusty ciąg nie jest poprawny
@@ -47,9 +46,9 @@ bool    is_input_valid(const char *line)
     if(!is_quote_closed(line))
         return(false);
     return(true);
-} 
+}
 
-bool    check_input(const char *line)
+bool    check_input(char *line)
 {
     if(!is_input_valid(line))
     {

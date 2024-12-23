@@ -1,9 +1,9 @@
 # Kompilator i flagi
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I/usr/local/opt/readline/include -Iinclude
+HEADERS = -I./lib_ft -I./lib_ft_printf -I./inc
+LDFLAGS = -L/usr/local/opt/readline/lib -lreadline
 
-
-LDFLAGS = -lreadline
 
 # Nazwa programu
 NAME = shell

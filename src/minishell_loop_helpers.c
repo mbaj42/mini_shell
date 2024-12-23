@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:46 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 20:31:36 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 23:18:15 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //✅ 
 bool	handle_whitespace_or_syntax(t_data **minishell)
 {
-    if (ft_is_only_whitespace((*minishell)->input))
+    if (ft_is_only_whitespaces((*minishell)->input))
 	{
 		free((*minishell)->input);
 		return (true);
@@ -27,7 +27,7 @@ bool	handle_whitespace_or_syntax(t_data **minishell)
         ft_handle_error("Minihell_Maja_Edyta: syntax error");
         return(true);
     }
-    if (!ft_is_only_whitespace((*minishell)->input))
+    if (!ft_is_only_whitespaces((*minishell)->input))
 	    add_history((*minishell)->input);
         //biblioteka readline
     return(false);

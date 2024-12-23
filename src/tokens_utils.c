@@ -6,13 +6,13 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:21 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/18 16:43:14 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 23:15:58 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-int    ft_is_only_white_spaces(char *str)
+int    ft_is_only_whitespaces(char *str)
 {
     int     i;
 

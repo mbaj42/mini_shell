@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:39 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/23 22:50:02 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 23:04:27 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    ft_free_minishell(t_data **minishell, bool is_crash)
         (*minishell)->input = NULL;
     if((*minishell)->tokens)
         ft_free_token_list(&(*minishell)->tokens);
-    if((*minishell)->commands)
+    //if((*minishell)->commands)
         //funkcja do czyszczenia komend;
     //if((*minishell)->env && is_crash)
         // funkcja do czyszczenia tych zmiennych środowiskowych, ale tylko, gdy jest awaria

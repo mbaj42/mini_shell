@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/20 20:40:48 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/23 23:24:03 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_tokens(t_data **minishell)
 
     token = NULL;
     string = (*minishell)->input;
-    if(!string || ft_is_only_whitespace(string) || ft_strlen(string) == 0)
+    if(!string || ft_is_only_whitespaces(string) || ft_strlen(string) == 0)
     {
             return(200);
     }
@@ -72,18 +72,18 @@ t_tokens	*get_token(char *input)
         return(NULL);
     token->value = NULL;
     token->next = NULL;
-    token->type = NULL;
+    token->type = 0;
     if(*input)
     {
         if(ft_strncmp(">>", input, 2) == 0)
             update_tokens(token, ">>", T_DGREAT);
         else if(ft_strncmp("<<", input, 2) == 0)
             update_tokens(token, "<<", T_DLESS);
-        else if(*input == "<")
+        else if(*input == '<')
             update_tokens(token, "<", T_LESS);
-        else if(*input == ">")
+        else if(*input == '>')
             update_tokens(token, ">", T_GREAT);
-        else if(*input == "|")
+        else if(*input == '|')
             update_tokens(token, "|", T_PIPE);
         else
             update_tokens(token, input, T_WORD);
@@ -125,13 +125,3 @@ char    *ft_strncpy(char *dst, char *src, int num)
     return(dst);
 }
 
-int	ft_is_only_whitespace(char *str)
-{
-	while (*str)
-	{
-		if (!ft_is_whitespace(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
