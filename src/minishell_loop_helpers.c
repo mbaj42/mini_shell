@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:46 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/23 23:18:15 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:01:18 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ bool	handle_whitespace_or_syntax(t_data **minishell)
 bool	process_tokens(t_data **minishell)
 {
     init_tokens(minishell); // ✅ 
-    //sprawdza tokeny
+    if (validate_tokens((*minishell)->tokens) < 0)
+	{
+		ft_handle_error("Token validation failed: syntax error detected.");
+		return (false);
+	}
     //parsuje je i rozszerza o zmienne środowiskowe
     //obsługuje przekierowania < i >
     // zwraca true, jeśli wszystko się powiedzie

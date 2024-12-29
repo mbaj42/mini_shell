@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/23 23:31:47 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:02:20 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int					init_tokens(t_data **minishell);
 t_tokens			*get_token(char *input);
 t_tokens			*update_tokens(t_tokens *token, char *input, int type);
 void				append_token(t_tokens **tokens, t_tokens *new_token);
+t_tokens			*update_token_word(t_tokens *token, char *input, int type);
+int					validate_tokens(t_tokens *tokens);
 
 // help
 char				*ft_strncpy(char *dst, char *src, int num);

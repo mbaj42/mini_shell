@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/23 23:24:03 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 18:59:02 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,33 @@ void    append_token(t_tokens **tokens, t_tokens *new_token)
 
 //✅ 
 //inicjalizujemy strukturę tokeny
+
+int	validate_tokens(t_tokens *tokens)
+{
+	t_tokens	*current;
+
+	if (!tokens)
+		return (200);
+	current = tokens;
+	while (current && current->next)
+	{
+		if (current->type != 0 && current->next->type != 0)
+		{
+			ft_printf("Minihell_Maja_Edyta: syntax error near unexpected token `%s'\n",
+				current->next->value);
+			return (-404);
+		}
+		current = current->next;
+	}
+	if (current->type > 0)
+	{
+		printf("Minihell_Maja_Edyta: syntax error near unexpected token `%s'\n",
+			current->value);
+		return (-405);
+	}
+	return (200);
+}
+
 int	init_tokens(t_data **minishell)
 {
     char    *string;
@@ -86,22 +113,10 @@ t_tokens	*get_token(char *input)
         else if(*input == '|')
             update_tokens(token, "|", T_PIPE);
         else
-            update_tokens(token, input, T_WORD);
+            update_tokens(token, input, T_WORD); // update token word
     }
     free(token);
     return(NULL);
-}
-
-//✅ 
-t_tokens *update_tokens(t_tokens *token, char *input, int type)
-{
-    token->value = malloc(ft_strlen(input) + 1);
-    if(!token->value)
-        return(NULL);
-    ft_strncpy(token->value, input, ft_strlen(input));
-    token->value[ft_strlen(input)] = '\0';
-    token->type = type;
-    return(token);
 }
 
 //✅ 
