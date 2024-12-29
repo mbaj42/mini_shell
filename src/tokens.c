@@ -6,34 +6,31 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:35:26 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/29 18:59:02 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:29:55 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-//✅ 
-void    append_token(t_tokens **tokens, t_tokens *new_token)
+void	append_token(t_tokens **tokens, t_tokens *new_token)
 {
-    t_tokens *current;
-    if(*tokens == NULL)
-    {
-        new_token->prev = NULL;
-        *tokens = new_token;
-    }
-    else
-    {
-        current = *tokens;
-        while(current->next != NULL)
-            current = current->next;
-        current->next = new_token;
-        new_token->prev = current;
-    }
-    new_token->next = NULL;
-}
+	t_tokens	*current;
 
-//✅ 
-//inicjalizujemy strukturę tokeny
+	if (*tokens == NULL)
+	{
+		new_token->prev = NULL;
+		*tokens = new_token;
+	}
+	else
+	{
+		current = *tokens;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_token;
+		new_token->prev = current;
+	}
+	new_token->next = NULL;
+}
 
 int	validate_tokens(t_tokens *tokens)
 {
@@ -46,16 +43,14 @@ int	validate_tokens(t_tokens *tokens)
 	{
 		if (current->type != 0 && current->next->type != 0)
 		{
-			ft_printf("Minihell_Maja_Edyta: syntax error near unexpected token `%s'\n",
-				current->next->value);
+			ft_printf("Minihell_Maja_Edyta: syntax error near unexpected token");
 			return (-404);
 		}
 		current = current->next;
 	}
 	if (current->type > 0)
 	{
-		printf("Minihell_Maja_Edyta: syntax error near unexpected token `%s'\n",
-			current->value);
+		printf("Minihell_Maja_Edyta: syntax error near unexpected token");
 		return (-405);
 	}
 	return (200);
@@ -88,8 +83,6 @@ int	init_tokens(t_data **minishell)
     return(200);
 }
 
-
-//✅ 
 t_tokens	*get_token(char *input)
 {
     t_tokens *token;
@@ -113,13 +106,12 @@ t_tokens	*get_token(char *input)
         else if(*input == '|')
             update_tokens(token, "|", T_PIPE);
         else
-            update_tokens(token, input, T_WORD); // update token word
+            update_tokens(token, input, T_WORD);
     }
     free(token);
     return(NULL);
 }
-
-//✅ 
+ 
 char    *ft_strncpy(char *dst, char *src, int num)
 {
     int     i;
@@ -139,4 +131,3 @@ char    *ft_strncpy(char *dst, char *src, int num)
     }
     return(dst);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/29 19:02:20 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:37:24 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # include "tokens.h"
 # include "parsing.h"
 
-# define PROMPT "Minihell_Maja_Edyta > "
+# define PROMPT "Mini_hell_Maja_Edyta > "
+# define HEREDOC_PROMPT "> "
 
 # ifndef ECHOCTL
 #  define ECHOCTL 0001000
@@ -92,4 +93,5 @@ void				ft_skip_spaces(char **s);
 //
 void				setup_signal_handlers(void);
 void				handle_sigint(int sig);
+
 #endif

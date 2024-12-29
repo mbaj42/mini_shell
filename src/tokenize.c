@@ -6,10 +6,9 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:27 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/29 19:03:17 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 19:04:48 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/shell.h"
 
@@ -49,6 +48,7 @@ static t_tokens	*allocate_token_value(t_tokens *token, const char *input,
 	token->value[length] = '\0';
 	return (token);
 }
+
 t_tokens	*update_token_word(t_tokens *token, char *input, int type)
 {
 	int	i;
@@ -60,7 +60,6 @@ t_tokens	*update_token_word(t_tokens *token, char *input, int type)
 	token->type = type;
 	return (token);
 }
-
 // Znajduje pierwsze "słowo" w input.
 // Kopiuje je do tokena (token->value).
 // Ustawia typ tokena (token->type).
