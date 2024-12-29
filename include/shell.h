@@ -6,7 +6,7 @@
 /*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/29 19:37:24 by ecymer           ###   ########.fr       */
+/*   Updated: 2024/12/29 20:18:38 by ecymer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_data
 }					t_data;
 
 void				minishell_loop(t_data **minishell);
-void				init_minishell(t_data **minishell, char **envp);
 void				reset_echoctl(void);
 bool				handle_empty_input(t_data **minishell);
 
