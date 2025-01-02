@@ -12,21 +12,29 @@
 
 #include "../include/shell.h"
 
-// double check
-int	builtin_commands(char **argv, t_env **env)
+int	builtin_commands(t_data **minishell, t_env **env)
 {
 	t_command_full	*fd;
 
-	if (strcmp(argv[1], "export") == 0)
-		export_builtin(argv, env);
-	if (strcmp(argv[1], "echo") == 0)
-		echo_builtin(argv, fd->fd_out);
+	if (strcmp((*minishell)->commands->cmd_name, "export") == 0)
+		export_builtin((*minishell)->commands->args, env);
+	if (strcmp((*minishell)->commands->cmd_name, "echo") == 0)
+		echo_builtin((*minishell)->commands->args, fd->fd_out);
+	if (strcmp((*minishell)->commands->cmd_name, "exit") == 0)
+		exit_builtin((*minishell)->commands->args);
+	if (strcmp((*minishell)->commands->cmd_name, "unset") == 0)
+		unset_builtin((*minishell)->commands->args);
+	if (strcmp((*minishell)->commands->cmd_name, "pwd") == 0)
+		pwd_builtin((*minishell)->commands->args);
+	if (strcmp((*minishell)->commands->cmd_name, "cd") == 0)
+		cd_builtin((*minishell)->commands->args);
 	return (0);
 }
 int	main(int argc, char **envp)
 {
-	char argv = {"export", '\0'};
+	char	argv;
 
+	argv = {"export", '\0'};
 	builtin_commands(&argv, &envp);
 	return (0);
 }

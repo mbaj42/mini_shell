@@ -6,9 +6,18 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 19:50:47 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/22 19:50:50 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/01/02 17:57:59 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
+void	cd_builtin(t_data **minishell)
+{
+
+	if ((*minishell)->commands->args[2][0] == "/")
+	{
+
+	}
+	else
+}
