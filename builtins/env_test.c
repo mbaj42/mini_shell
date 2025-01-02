@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 // Define the structure
 typedef struct s_env {
     char *key;           // Name of the variable
@@ -39,3 +39,4 @@ int main() {
 
     return 0;
 }
+*/

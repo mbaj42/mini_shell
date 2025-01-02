@@ -1,16 +1,16 @@
-#include <errno.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <termios.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo_builtin.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/22 19:51:18 by mbaj              #+#    #+#             */
+/*   Updated: 2024/12/22 19:51:48 by mbaj             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/shell.h"
 
 static bool	search_for_n_flag(char *arg)
 {
@@ -38,7 +38,7 @@ static void	print_args(char **argv, bool found_n, int fd_out)
 	}
 	while (argv[i])
 	{
-		ft_putstr(argv[1], fd_out);
+		ft_putstr_fd(argv[1], fd_out);
 		if (argv[i + 1])
 			write(fd_out, " ", 1);
 		i++;

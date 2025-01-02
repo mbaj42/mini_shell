@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:42:17 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/21 16:41:59 by mbaj             ###   ########.fr       */
+/*   Updated: 2024/12/23 18:42:48 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 {
 	t_env	tmp;
 	bool	is_crush;
+	int		i;
 	int		i;
 
 	(*minishell).env = malloc((strlen(ev) + 1) * sizeof(char **));
@@ -32,22 +33,24 @@
 	}
 	(*minishell).env[i] = tmp;
 }*/
-void free_env(t_env *env)
+void	free_env(t_env *env)
 {
-    int i = 0;
-    if (!env)
-        return;
-    while (env[i].key)
-    {
-        free(env[i].key);
-        free(env[i].value);
-        i++;
-    }
-    free(env);
+	int	i;
+	
+	i = 0;
+	if (!env)
+		return ;
+	while (env[i].key)
+	{
+		free(env[i].key);
+		free(env[i].value);
+		i++;
+	}
+	free(env);
 }
 static int	malloc_env(t_data **minishell, char **ev, int i, char *delimiter)
 {
-	int		key_length;
+	int	key_length;
 
 	if (!(*minishell) || !((*minishell)->env))
 		return (1);
