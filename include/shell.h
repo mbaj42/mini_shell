@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/29 20:18:38 by ecymer           ###   ########.fr       */
+/*   Updated: 2025/01/04 17:19:10 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
-# include <limits.h>
+# include <linux/limits.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <sys/types.h>

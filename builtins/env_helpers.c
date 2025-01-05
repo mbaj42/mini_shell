@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtin.c                                      :+:      :+:    :+:   */
+/*   env_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/04 17:03:01 by mbaj              #+#    #+#             */
-/*   Updated: 2025/01/04 17:03:04 by mbaj             ###   ########.fr       */
+/*   Created: 2025/01/05 15:25:25 by mbaj              #+#    #+#             */
+/*   Updated: 2025/01/05 16:59:56 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-int	env_builtin(t_env node)
+void	update_env_value(t_data **minishell, char *key, char *new_value)
 {
 	t_env	*current;
 
-	*current = node;
-	if (!current)
+	current = (*minishell)->env;
+	while (current)
 	{
-		write(2, "Error with env", 14);
-		return (1);
+		if (ft_strcmp(current->key, key) == 0)
+		{
+			free(current->value);
+			current->value = ft_strdup(new_value);
+			if (!current->value)
+				ft_handle_error("Error updating env value");
+			return ;
+		}
+		current = current->next;
 	}
-	while (current != NULL)
-	{
-		ft_printf("%s=%s\n", current -> key, current -> value);
-		current = current -> next;
-	}
-	return (0);
 }

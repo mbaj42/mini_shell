@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 19:52:11 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/23 19:13:47 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/01/04 17:18:44 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	export_no_args(t_data **minishell, char **envp)
 	}
 }
 
-static int	is_only_key(t_data **minishell, int	i, int	j)
+static int	is_only_key(t_data **minishell, int i, int j)
 {
 	int	key_length;
 
@@ -39,7 +39,7 @@ static int	is_only_key(t_data **minishell, int	i, int	j)
 		return (2);
 	}
 	(*minishell)->env[j].key = ft_strncpy((*minishell)->env[j].key,
-				(*minishell)->commands->args[i], key_length);
+			(*minishell)->commands->args[i], key_length);
 	(*minishell)->env[j].value = malloc((1) * sizeof(char));
 	if (!(*minishell)->env[j].value)
 	{
@@ -53,15 +53,16 @@ static int	is_only_key(t_data **minishell, int	i, int	j)
 		(*minishell)->env[j + 1].value = NULL;
 		return (3);
 	}
-	return(0);
+	return (0);
 }
+
 static int	add_key_value(t_data **minishell, int i, int j)
 {
 	int	key_length;
 	int	value_length;
 
 	key_length = ft_strchr((*minishell)->commands->args[i], '=')
-			- (*minishell)->commands->args[i] + 1;
+		- (*minishell)->commands->args[i] + 1;
 	(*minishell)->env[j].key = malloc((key_length) * sizeof(char));
 	if (!(*minishell)->env[j].key)
 	{
@@ -69,9 +70,9 @@ static int	add_key_value(t_data **minishell, int i, int j)
 		return (2);
 	}
 	(*minishell)->env[j].key = ft_strncpy((*minishell)->env[j].key,
-				(*minishell)->commands->args[i], key_length);
+			(*minishell)->commands->args[i], key_length);
 	value_length = ft_strlen(ft_strchr((*minishell)->commands->args[i], '=')
-				+ 1) + 1;
+			+ 1) + 1;
 	(*minishell)->env[j].value = malloc(value_length * sizeof(char));
 	if (!(*minishell)->env[j].value)
 	{
@@ -79,19 +80,20 @@ static int	add_key_value(t_data **minishell, int i, int j)
 		return (2);
 	}
 	(*minishell)->env[j].value = ft_strncpy((*minishell)->env[j].value,
-				(*minishell)->commands->args[i], value_length);
+			(*minishell)->commands->args[i], value_length);
 	return (0);
 }
+
 static int	no_equal_sign(t_data **minishell, int i, int j, int is_equal_sign)
 {
 	if (is_equal_sign = 1)
-			{
-				is_only_key(&(*minishell), i, j);
-				if(is_only_key(&(*minishell), i, j) == 3)
-					return (0);
-			}
-			else
-				return (1);
+	{
+		is_only_key(&(*minishell), i, j);
+		if (is_only_key(&(*minishell), i, j) == 3)
+			return (0);
+	}
+	else
+		return (1);
 	return (0);
 }
 
@@ -120,5 +122,5 @@ int	export_builtin(t_data **minishell, char **envp)
 	}
 	(*minishell)->env[j].key = NULL;
 	(*minishell)->env[j].value = NULL;
-	return(0);
+	return (0);
 }

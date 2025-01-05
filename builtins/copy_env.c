@@ -6,37 +6,16 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:42:17 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/23 18:42:48 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/01/04 17:17:32 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-/*int	main(int argc, t_data *minishell, char **ev)
-{
-	t_env	tmp;
-	bool	is_crush;
-	int		i;
-	int		i;
-
-	(*minishell).env = malloc((strlen(ev) + 1) * sizeof(char **));
-	if (!((*minishell).env))
-		return (ft_free_minishell((*minishell), is_crush));
-	i = 0;
-	tmp = (*minishell).env[i];
-	for (int i = 0; &(*minishell).env[i]; i++)
-	{ // dst   // src        // Adres 8    -  4
-		// alloc key i val
-		strncpy((*minishell).env[i].key, ev[i], strchr(ev[i], '=') - ev[i]);
-		strcpy((*minishell).env[i].value, strchr(ev[i], '=') + 1);
-		(*minishell).env = (*minishell).env->next;
-	}
-	(*minishell).env[i] = tmp;
-}*/
 void	free_env(t_env *env)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!env)
 		return ;

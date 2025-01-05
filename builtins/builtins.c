@@ -30,6 +30,7 @@ int	builtin_commands(t_data **minishell, t_env **env)
 		cd_builtin((*minishell)->commands->args);
 	return (0);
 }
+/*
 int	main(int argc, char **envp)
 {
 	char	argv;
@@ -37,4 +38,4 @@ int	main(int argc, char **envp)
 	argv = {"export", '\0'};
 	builtin_commands(&argv, &envp);
 	return (0);
-}
+}*/
