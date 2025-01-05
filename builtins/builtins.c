@@ -12,6 +12,25 @@
 
 #include "../include/shell.h"
 
+bool	is_builtin(t_command_full *command)
+{
+	char		*name;
+	int			i;
+	const char	*builtins[] = {"cd", "echo", "env", "exit", "export", "pwd",
+			"unset", NULL};
+
+	i = 0;
+	if (!command->args || command->args[0])
+		return (false);
+	name = command->cmd_name;
+	while (builtins[i])
+	{
+		if (ft_strcmp(name, builtins[i]) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
 int	builtin_commands(t_data **minishell, t_env **env)
 {
 	t_command_full	*fd;
