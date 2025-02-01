@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 23:57:43 by ecymer            #+#    #+#             */
-/*   Updated: 2025/01/18 18:23:54 by mbaj             ###   ########.fr       */
+/*   Created: 2025/01/31 22:40:32 by mbaj              #+#    #+#             */
+/*   Updated: 2025/01/31 22:58:50 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/shell.h"
 
-char	*ft_strchr(const char *s, int c)
+void	process(int id)
 {
-	while (*s != '\0' && *s != (char)c)
-		s++;
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	t_data	*fd1;
+
+	fd = open();
+	dup2((*fd1)->commands.fd_out, fd);
+	while ()
+	fork();
+	if (id == 1)
+	{
+
+	}
 }

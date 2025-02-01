@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:36:50 by ecymer            #+#    #+#             */
-/*   Updated: 2025/01/04 17:19:10 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/01/18 18:11:16 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ t_tokens			*update_tokens(t_tokens *token, char *input, int type);
 void				append_token(t_tokens **tokens, t_tokens *new_token);
 t_tokens			*update_token_word(t_tokens *token, char *input, int type);
 int					validate_tokens(t_tokens *tokens);
+
+int	check_path(t_command_full *arg, t_env *envp);
 
 // help
 char				*ft_strncpy(char *dst, char *src, int num);
