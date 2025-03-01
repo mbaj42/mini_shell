@@ -1,6 +1,6 @@
 # Kompilator i flagi
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/usr/local/opt/readline/include -Iinclude
+CFLAGS = -g -Wall -Wextra -Werror -I/usr/local/opt/readline/include -Iinclude
 HEADERS = -I./lib_ft -I./lib_ft_printf -I./inc
 LDFLAGS = -L/usr/local/opt/readline/lib -lreadline
 
@@ -16,6 +16,7 @@ PRINTF_DIR = printf
 
 # Pliki źródłowe i obiektowe
 SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC += $(wildcard builtins/*.c)
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # Biblioteki

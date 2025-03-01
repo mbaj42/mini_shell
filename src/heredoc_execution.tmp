@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_helpers.c                                      :+:      :+:    :+:   */
+/*   heredoc_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 15:25:25 by mbaj              #+#    #+#             */
-/*   Updated: 2025/02/18 19:35:21 by mbaj             ###   ########.fr       */
+/*   Created: 2025/02/15 19:09:08 by mbaj              #+#    #+#             */
+/*   Updated: 2025/02/20 19:57:39 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-void	ft_handle_error(const char *msg)
+char	*execution_heredoc(char *limiter)
 {
-	printf("ERROR: %s\n", msg);
-	exit(1);
-}
+	char	*line;
+	int		len;
+	int		fd;
 
-
-void	update_env_value(t_data **minishell, char *key, char *new_value)
-{
-	t_env	*current;
-
-	current = (*minishell)->env;
-	while (current)
+	line = NULL;
+	fd = open(".heredoc", O_WRONLY, O_CREAT, O_TRUNC);
+	dup2(fd, STDOUT_FILENO);
+	while (1)
 	{
-		if (ft_strncmp(current->key, key, ft_strlen(key)) == 0)
+		line = read_heredoc_line(limiter);
+		if (line == NULL)
 		{
-			free(current->value);
-			current->value = ft_strdup(new_value);
-			if (!current->value)
-				ft_handle_error("Error updating env value");
-			return ;
+			free(line);
+			return (NULL);
 		}
-		current = current->next;
+		len = ft_strlen(line);
+		write(fd, &line, len);
+		len = 0;
+		free(line);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 23:57:43 by ecymer            #+#    #+#             */
-/*   Updated: 2025/01/18 18:23:54 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/02/28 19:08:58 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0' && *s != (char)c)
+	while (*s && *s != '\0' && *s != (char)c)
 		s++;
 	if (*s == (char)c)
 		return ((char *)s);

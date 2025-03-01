@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecymer <ecymer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 19:16:53 by ecymer            #+#    #+#             */
-/*   Updated: 2024/06/19 20:02:38 by ecymer           ###   ########.fr       */
+/*   Updated: 2025/02/25 20:08:57 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t				ft_strlen(const char *s);
+void				ft_strcpy(char *dest, const char *src);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *str, const char *find, size_t len);
+int					ft_strcmp(const char *s1, const char *s2);  //added
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+char				*ft_strncpy(char *dest, const char *src, size_t n);
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);

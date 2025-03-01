@@ -1,14 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_helpers.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecymer <<marvin@42.fr>>                    +#+  +:+       +#+        */
+/*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 16:08:17 by ecymer            #+#    #+#             */
-/*   Updated: 2024/12/28 18:01:56 by ecymer           ###   ########.fr       */
+/*   Created: 2025/02/25 20:07:52 by mbaj              #+#    #+#             */
+/*   Updated: 2025/02/25 20:08:23 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../include/shell.h"
+#include "libft.h"
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}

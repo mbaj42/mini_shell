@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 19:50:47 by mbaj              #+#    #+#             */
-/*   Updated: 2025/01/05 16:57:15 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/02/20 18:11:10 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 void	add_to_env(t_data **minishell, char *key, char *new_value)
 {
 	t_env	*tmp;
-	t_env	*next;
 
 	tmp = (*minishell)->env;
 	while (tmp)
 	{
-		if (strncmp(tmp->key, key, sizeof (key)) == 0);
+		if (strncmp(tmp->key, key, ft_strlen(key)) == 0)
 		{
 			update_env_value(minishell, key, new_value);
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		tmp = tmp->next;
 	}
@@ -34,7 +33,7 @@ static char	*get_home_env_value(t_env *env, const char *key)
 {
 	while (env)
 	{
-		if (ft_strchr(env->key, key) == 0)
+		if (ft_strchr(env->key, ft_strlen(key)) == 0)
 			return (env->value);
 		env = env->next;
 	}
@@ -44,7 +43,7 @@ static char	*get_home_env_value(t_env *env, const char *key)
 
 static int	get_current_pwd(char *current_pwd)
 {
-	if (!getcwd(current_pwd, sizeof(current_pwd)))
+	if (!getcwd(current_pwd, PATH_MAX))
 	{
 		write(2, "Error while getting current pwd", 32);
 		return (1);
@@ -76,7 +75,7 @@ int	cd_builtin(t_data **minishell)
 			return (1);
 	}
 	target_directory = (*minishell)->commands->args[1];
-	if (!chdir(target_directory))
+	if (chdir(target_directory) < 0)
 	{
 		write(2, "the directory doesn't exist", 28);
 		return (1);

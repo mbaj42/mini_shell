@@ -6,7 +6,7 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 19:51:18 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/22 19:51:48 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/02/06 21:21:53 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static bool	search_for_n_flag(char *arg)
 		return (false);
 	return (true);
 }
+
 static void	print_args(char **argv, bool found_n, int fd_out)
 {
 	int	i;
@@ -38,14 +39,13 @@ static void	print_args(char **argv, bool found_n, int fd_out)
 	}
 	while (argv[i])
 	{
-		ft_putstr_fd(argv[1], fd_out);
+		ft_putstr_fd(argv[i], fd_out);
 		if (argv[i + 1])
 			write(fd_out, " ", 1);
 		i++;
 	}
 	if (found_n == false)
 		write(fd_out, "\n", 1);
-	return ;
 }
 void	echo_command(char **argv, int fd_out)
 {
@@ -54,11 +54,11 @@ void	echo_command(char **argv, int fd_out)
 
 	i = 1;
 	found_n = false;
-	while (argv[i] && search_for_n_flag(argv[i]))
+	while (argv[i] && search_for_n_flag(argv[i]) == true)
 	{
 		found_n = true;
 		i++;
 	}
-	print_args(argv + 1, found_n, fd_out);
+	print_args(argv + i, found_n, fd_out);
 	return ;
 }

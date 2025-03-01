@@ -6,57 +6,56 @@
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 16:58:23 by mbaj              #+#    #+#             */
-/*   Updated: 2024/12/21 18:23:13 by mbaj             ###   ########.fr       */
+/*   Updated: 2025/02/28 18:41:45 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-void	swap_env(t_env *a, t_env *b)
+void	alphabetical_order(t_env **env)
 {
-	t_env	tmp;
+	t_env	*current;
+	t_env	*prev;
+	t_env	*next;
+	int		swapped;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	if (!env || !(*env) || !(*env)->next)
+		return ;
 
-}
-void	alphabetical_order(t_data **minishell)
-{
-	int		i;
-	int		j;
-	int		env_count;
-
-	i = 0;
-	if (!(*minishell) || !(*minishell)->env)
-		return;
-	while((*minishell)->env[env_count].key)
-		env_count;
-	while (i < env_count - 1)
+	swapped = 1;
+	while (swapped)
 	{
-		j = 0;
-		while (j < env_count - i -1)
-		{
-			if (ft_strcmp((*minishell)->env[j].key, (*minishell)->env[j + 1].key) > 0);
-				swap_env(&(*minishell)->env[j], &(*minishell)->env[j + 1]);
-			j++;
-		}
-		i++;
-	}
+		swapped = 0;
+		prev = NULL;
+		current = *env;
 
+		while (current && current->next)
+		{
+			next = current->next;
+			if (ft_strcmp(current->key, next->key) > 0)
+			{
+				// Swap nodes instead of just values
+				current->next = next->next;
+				next->next = current;
+
+				if (prev)
+					prev->next = next;
+				else
+					*env = next;
+
+				swapped = 1;
+				prev = next;
+			}
+			else {
+				prev = current;
+				current = current->next;
+			}
+		}
+	}
 }
 void	swap_alphabetic(t_data **minishell)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (&(*minishell)->env[i])
-	{
-	if (!(ft_is_alpha((*minishell)->env[i].key[j])))
-		return (1);
-	i++;
-	}
-	alphabetical_order(&minishell);
+	if (!(*minishell) || !(*minishell)->env)
+		return ;
+	alphabetical_order(&(*minishell)->env);
 }

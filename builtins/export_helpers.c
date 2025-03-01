@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   export_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaj <mbaj@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 19:53:15 by mbaj              #+#    #+#             */
-/*   Updated: 2025/02/06 21:25:29 by mbaj             ###   ########.fr       */
+/*   Created: 2025/02/22 18:37:35 by mbaj              #+#    #+#             */
+/*   Updated: 2025/02/22 18:47:30 by mbaj             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shell.h"
 
-int	pwd_builtin(void)
+int	get_key_length(const char *argv)
 {
-	char current_path[PATH_MAX];
+	int len;
 
-	if (getcwd(current_path, sizeof(current_path)))
-	{
-		ft_putstr_fd(current_path, 1);
-		ft_putstr_fd("\n", 1);
-	}
-	else
-	{
-		ft_putstr_fd("error with pwd_builtin function\n", 2);
-		return (1);
-	}
-	return (0);
+	len = 0;
+	while (argv[len] && argv[len] != '=')
+		len++;
+	if (argv[len] == '=')
+		len++;
+	return (len);
 }
